@@ -72,6 +72,24 @@ export default class Navbar extends Component {
                 Hooks Page
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                activeClassName="active"
+                className="nav-link"
+                to="/material"
+              >
+                Material Page
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                activeClassName="active"
+                className="nav-link"
+                to="/styled"
+              >
+                Styled Component Page
+              </NavLink>
+            </li>
           </ul>
         </div>
       </nav>

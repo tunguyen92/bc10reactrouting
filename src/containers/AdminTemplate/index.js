@@ -1,6 +1,6 @@
 import React from "react";
 import NavbarAdmin from "./components/Navbar";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 function LayoutAdmin(props) {
   return (
@@ -14,13 +14,20 @@ function LayoutAdmin(props) {
 export default function AdminTemplate({ Component, ...props }) {
   return (
     <Route
-      //{...props} có exact và path
+      //{...props} thay thế cho exact vs path
       {...props}
-      render={(propsRoute) => (
-        <LayoutAdmin>
-          <Component {...propsRoute} />
-        </LayoutAdmin>
-      )}
+      render={(propsRoute) => {
+        if (localStorage.getItem("UserAdmin")) {
+          return (
+            <LayoutAdmin>
+              <Component {...propsRoute} />
+            </LayoutAdmin>
+          );
+        }
+
+        //Chuyen huong ve trang auth
+        return <Redirect to="/auth" />;
+      }}
     />
   );
 }

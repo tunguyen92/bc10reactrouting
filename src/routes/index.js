@@ -1,12 +1,14 @@
-import HomePage from "../containers/HomeTemplate/HomePage";
-import AboutPage from "../containers/HomeTemplate/AboutPage";
-import ListMoviePage from "../containers/HomeTemplate/ListMoviePage";
-import DetailMoviePage from "../containers/HomeTemplate/DetailMoviePage";
-import Dashboard from "../containers/AdminTemplate/Dashboard";
 import AddUser from "../containers/AdminTemplate/AddUser";
+import Dashboard from "../containers/AdminTemplate/Dashboard";
+import AboutPage from "../containers/HomeTemplate/AboutPage";
+import DetailMoviePage from "../containers/HomeTemplate/DetailMoviePage";
 import HOCPage from "../containers/HomeTemplate/HOCPage";
-import RenderProps from "../containers/HomeTemplate/RenderProps";
+import HomePage from "../containers/HomeTemplate/HomePage";
 import HooksPage from "../containers/HomeTemplate/HooksPage";
+import ListMoviePage from "../containers/HomeTemplate/ListMoviePage";
+import MaterialPage from "../containers/HomeTemplate/MaterialPage";
+import RenderProps from "../containers/HomeTemplate/RenderProps";
+import StyledComponentPage from "../containers/HomeTemplate/StyledComponentPage";
 
 const routesHome = [
   {
@@ -43,6 +45,16 @@ const routesHome = [
     exact: false,
     path: "/hooks",
     component: HooksPage,
+  },
+  {
+    exact: false,
+    path: "/material",
+    component: MaterialPage,
+  },
+  {
+    exact: false,
+    path: "/styled",
+    component: StyledComponentPage,
   },
 ];
 

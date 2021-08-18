@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { routesAdmin, routesHome } from "./routes";
 import HomeTemplate from "./containers/HomeTemplate";
 import AdminTemplate from "./containers/AdminTemplate";
+import AuthPage from "./containers/AdminTemplate/Auth";
 
 function App() {
   const renderLayoutHome = (routes) => {
@@ -37,6 +38,9 @@ function App() {
       <Switch>
         {renderLayoutHome(routesHome)}
         {renderLayoutAdmin(routesAdmin)}
+
+        {/* Auth */}
+        <Route path="/auth" component={AuthPage} />
 
         {/* Trang không tồn tại nằm cuối */}
         <Route path="" component={PageNotFound} />
