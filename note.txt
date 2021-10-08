@@ -89,3 +89,45 @@ https://github.com/dpnguyen53/bc10reactrouting
     - Là 1 function => function này nó sẽ return về 1 Class Component (Function Component) khác
 * Render Props (Adv): Tái sử dụng
 * Routing (Adv)
+
+======== Buổi 12 ======
+* Hooks
+
+======== Buổi 13 ======
+* Auth
+* Guard Routing Admin
+
+======== Buổi 14 ======
+* Add user(Token)
+* Material UI
+* Styledd Component
+
+======== Buổi 15 ======
+* Refactor code call api
+    - Flow login Auth
+        + dispatch actAuthSuccess
+        + setHeader token
+        + timeout exp
+
+* Flow reload web (actTryLogin)
+        + timeout exp
+        + dispatch actAuthSuccess
+        + setHeader token 
+        
+* Logout
+    - remove accessToken
+    - redirect /auth
+    - clear reducer Auth
+
+======== Buổi 16 ======
+* alias
+* Lazy load page
+* Deploy app heroku
+* Build
+    - Hositing (Server)
+    - Domain
+
+* Java
+    build
+
+* Nextjs

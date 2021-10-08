@@ -1,17 +1,24 @@
+import api from "../../../../utils/apiUtils";
+import setHeader from "../../../../utils/setHeader";
 import * as ActionType from "./constants";
-import axios from "axios";
+
+//Giả sử BE trả về time exp: 3600000
+const TIME_EXP = 3600000;
+// const TIME_EXP = 10000;
 
 export const actLoginAuth = (user, history) => {
   return async (dispatch) => {
     try {
       dispatch(actAuthRequest());
 
-      const result = await axios({
-        url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
-        method: "POST",
-        data: user,
-      });
-      console.log(result);
+      // const result = await axios({
+      //   url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
+      //   method: "POST",
+      //   data: user,
+      // });
+      const result = await api.post("QuanLyNguoiDung/DangNhap", user);
+
+      // console.log(result);
       if (result.statusText === "OK") {
         //check maLoaiNguoiDung === "KhachHang" => Thong bao
         if (result.data.maLoaiNguoiDung === "KhachHang") {
@@ -24,6 +31,16 @@ export const actLoginAuth = (user, history) => {
             dispatch(actAuthFailed(error));
           });
         }
+
+        //set accessToken vào header
+        setHeader(result.data.accessToken);
+
+        //Thời gian hết hạn login
+        //Lưu exp time xuống localStorage
+        const date = new Date().getTime();
+        const exp = date + TIME_EXP;
+        localStorage.setItem("exp", exp);
+        dispatch(actSetTimeoutLogout(history, TIME_EXP));
 
         //Luu trang thai login o localStorage
         localStorage.setItem("UserAdmin", JSON.stringify(result.data));
@@ -39,6 +56,51 @@ export const actLoginAuth = (user, history) => {
     } catch (error) {
       dispatch(actAuthFailed(error));
     }
+  };
+};
+
+//Trường hợp reload
+export const actTryLogin = (history) => {
+  return (dispatch) => {
+    const user = JSON.parse(localStorage.getItem("UserAdmin"));
+    if (!user) return;
+
+    //Tính toán thời gian exp
+    const exp = localStorage.getItem("exp");
+    const date = new Date().getTime();
+    if (date > exp) {
+      dispatch(actLogout(history));
+      return;
+    }
+
+    dispatch(actSetTimeoutLogout(history, exp - date));
+    setHeader(user.accessToken);
+    dispatch(actAuthSuccess(user));
+  };
+};
+
+//Logout
+export const actLogout = (history) => {
+  //clear localStorage
+  localStorage.removeItem("UserAdmin");
+  localStorage.removeItem("exp");
+
+  //redirect page Auth
+  history.replace("/auth");
+
+  //clear reducer Auth
+  return {
+    type: ActionType.AUTH_CLEAR_DATA,
+  };
+};
+
+//Tính toán thời gian hết hạn token
+//Thời gian hết hạn là 1h = 3600000ms
+const actSetTimeoutLogout = (history, expTimeout) => {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(actLogout(history));
+    }, expTimeout);
   };
 };
 

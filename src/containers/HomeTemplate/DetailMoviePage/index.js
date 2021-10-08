@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Loader from "../../../component/Loader";
+import Loader from "../../../components/Loader";
 import { actFetchDetailMovie } from "./modules/actions";
 import { connect } from "react-redux";
 

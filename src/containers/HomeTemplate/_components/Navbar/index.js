@@ -85,7 +85,7 @@ export default class Navbar extends Component {
               <NavLink
                 activeClassName="active"
                 className="nav-link"
-                to="/styled"
+                to="/styled-components"
               >
                 Styled Component Page
               </NavLink>

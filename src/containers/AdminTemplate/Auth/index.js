@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { actLoginAuth } from "./modules/actions";
 import { connect } from "react-redux";
-import Loader from "../../../component/Loader";
+import Loader from "../../../components/Loader";
 import { Redirect } from "react-router-dom";
 
 function AuthPage(props) {

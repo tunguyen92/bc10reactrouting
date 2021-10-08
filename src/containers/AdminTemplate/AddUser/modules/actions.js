@@ -1,5 +1,5 @@
+import api from "../../../../utils/apiUtils";
 import * as ActionType from "./constants";
-import axios from "axios";
 
 export const actAddUser = (user) => {
   let accessToken = "";
@@ -10,14 +10,16 @@ export const actAddUser = (user) => {
   return async (dispatch) => {
     try {
       dispatch(actAddUserRequest());
-      const result = await axios({
-        url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThemNguoiDung",
-        method: "POST",
-        data: user,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      // const result = await axios({
+      //   url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThemNguoiDung",
+      //   method: "POST",
+      //   data: user,
+      //   headers: {
+      //     Authorization: `Bearer ${accessToken}`,
+      //   },
+      // });
+
+      const result = await api.post("QuanLyNguoiDung/ThemNguoiDung", user);
 
       if (result.statusText === "OK") {
         dispatch(actAddUserSuccess(result.data));

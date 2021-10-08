@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, withRouter } from "react-router-dom";
+import { actLogout } from "../../Auth/modules/actions";
+import { connect } from "react-redux";
 
-export default class NavbarAdmin extends Component {
+class NavbarAdmin extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-md bg-dark navbar-dark">
@@ -40,9 +42,32 @@ export default class NavbarAdmin extends Component {
                 Add User
               </NavLink>
             </li>
+            <li className="nav-item">
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  //dispatch action logout
+                  this.props.logout(this.props.history);
+                }}
+              >
+                Log out
+              </button>
+            </li>
           </ul>
         </div>
       </nav>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: (history) => {
+      dispatch(actLogout(history));
+    },
+  };
+};
+
+const ConnectedComponent = connect(null, mapDispatchToProps)(NavbarAdmin);
+
+export default withRouter(ConnectedComponent);

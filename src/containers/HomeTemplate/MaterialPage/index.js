@@ -8,6 +8,7 @@ export default function MaterialPage() {
   return (
     <div className={classes.content}>
       <h3 className={classes.title}>MaterialPage</h3>
+      <span></span>
       <Button variant="contained" color="primary">
         Primary
       </Button>
